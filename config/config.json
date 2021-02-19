@@ -1,6 +1,6 @@
 {
   "development": {
-    "database": "express_auth_dev",
+    "database": "myFridge_dev",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

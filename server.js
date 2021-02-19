@@ -50,9 +50,13 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.get('/edit', (req, res) => {
+  res.render('edit');
+});
+
 app.get('/profile', isLoggedIn, (req, res) => {
   const { id, name, email } = req.user.get(); 
-  res.render('profile', { id, name, email });
+  res.render('profile');
 });
 
 const PORT = process.env.PORT || 3000;
@@ -61,18 +65,5 @@ const server = app.listen(PORT, () => {
 });
 
 module.exports = server;
-
-
-
-// espn.com
-
-// basketball/college
-// basketball/nba
-// basketball/gleague
-// basketball/europe
-
-// football
-// baseball
-// ...
 
 
