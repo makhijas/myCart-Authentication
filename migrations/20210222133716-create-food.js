@@ -1,10 +1,7 @@
 'use strict';
-
-const { FOREIGNKEYS } = require("sequelize/types/lib/query-types");
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('freshFoods', {
+    await queryInterface.createTable('food', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,8 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER,
-        foreignKey: true
+        type: Sequelize.INTEGER
       },
       item: {
         type: Sequelize.STRING
@@ -32,6 +28,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('freshFoods');
+    await queryInterface.dropTable('food');
   }
 };

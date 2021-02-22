@@ -3,6 +3,7 @@ body {
   background-repeat: no-repeat;
   background-size: 1000px 800px;
   color: white;
+  background-color: grey;
 }
 nav ul li {
   text-decoration: none;

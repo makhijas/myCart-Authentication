@@ -68,14 +68,27 @@ app.post('/profile', (req, res) => {
   db.item = item
   db.quantity = quantity
   console.log(`I have ${quantity} ${item}`)
+  db.food.create({
+    include: [db.user.id],
+    where: {id: req.params.id},
+    item: req.body.item,
+    quantity: req.body.quantity,
+  })
+  .then(function(post) {
+    console.log(`${quantity} ${item} saved to database`)
+    res.redirect('/profile')
+  })
+  .catch(function(error) {
+    res.send(error)
+  })
 });
 
 app.post('/edit', function(req, res) {
   console.log(req.body.item, req.body.quantity)
   // userId = req.params.id
   console.log(req.params.id)
-  db.freshFood.create({
-    userId: 1,
+  db.food.create({
+    //userId: 1,
     item: req.body.item,
     quantity: req.body.quantity,
   })

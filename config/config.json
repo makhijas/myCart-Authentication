@@ -1,6 +1,6 @@
 {
   "development": {
-    "database": "myFridge_dev",
+    "database": "theFridge",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
