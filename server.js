@@ -60,14 +60,32 @@ app.get('/edit', (req, res) => {
 app.get('/profile', isLoggedIn, (req, res) => {
 
   const { id, name, email } = req.user.get(); 
+  const { item } = req.food.get()
   db.food.findByPk(req.user.id, {include: db.user})
   .then(food => { 
     console.log(food)
-    res.render('profile', {name: name, id: id, email: email, food:food.dataValues.item});
+    res.render('profile', {name: name, id: id, email: email, foodItem:food.dataValues.item, foodQuantity:food.dataValues.quantity, item:item});
   })
 
   // res.render('profile', {name: name, id: id, email: email});
 }); 
+
+// app.get('/profile', isLoggedIn, (req, res) => {
+//   db.user.findOne({
+//     include: [db.food],
+//     where: {
+//       id: req.user.id
+//     } 
+//   }).then(function(food){
+//     // users will have a .pets key with an array of pets
+//     // console.log(user[0].pets);
+//     console.log(food)
+//     res.render('profile', { data:food });
+//   })
+//     // const { id, name, email } = req.user.get();
+// }).catch
+
+
 
 app.post('/profile', (req, res) => {
   let item = req.body.item
@@ -77,7 +95,7 @@ app.post('/profile', (req, res) => {
   db.quantity = quantity
   console.log(`I have ${quantity} ${item}`)
   db.food.create({
-    where: {id: req.params.id},
+    //where: {id: req.params.id},
     userId: req.body.userId,
     item: req.body.item,
     quantity: req.body.quantity,
