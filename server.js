@@ -49,6 +49,7 @@ app.use((req, res, next) => {
 app.use('/auth', require('./controllers/auth'));
 
 app.get('/', (req, res) => {
+  // const {item, quantity} = req.food.get()
   res.render('index');
 });
 
@@ -58,8 +59,8 @@ app.get('/edit', (req, res) => {
 
 app.get('/profile', isLoggedIn, (req, res) => {
   const { id, name, email } = req.user.get(); 
-  res.render('profile');
-});
+  res.render('profile', {name: name, id: id, email: email});
+}); 
 
 app.post('/profile', (req, res) => {
   let item = req.body.item
@@ -69,8 +70,8 @@ app.post('/profile', (req, res) => {
   db.quantity = quantity
   console.log(`I have ${quantity} ${item}`)
   db.food.create({
-    include: [db.user.id],
     where: {id: req.params.id},
+    userId: req.body.userId,
     item: req.body.item,
     quantity: req.body.quantity,
   })
