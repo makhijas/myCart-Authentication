@@ -79,7 +79,7 @@ app.post('/edit', function(req, res) {
     item: req.body.item,
     quantity: req.body.quantity,
   })
-  .then(function(profile) {
+  .then(function(post) {
     console.log(`${quantity} ${item} saved to database`)
     res.redirect('/profile')
   })
