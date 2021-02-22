@@ -58,8 +58,15 @@ app.get('/edit', (req, res) => {
 });
 
 app.get('/profile', isLoggedIn, (req, res) => {
+
   const { id, name, email } = req.user.get(); 
-  res.render('profile', {name: name, id: id, email: email});
+  db.food.findByPk(req.user.id, {include: db.user})
+  .then(food => { 
+    console.log(food)
+    res.render('profile', {name: name, id: id, email: email, food:food.dataValues.item});
+  })
+
+  // res.render('profile', {name: name, id: id, email: email});
 }); 
 
 app.post('/profile', (req, res) => {
