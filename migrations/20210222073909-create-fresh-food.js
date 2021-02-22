@@ -1,4 +1,7 @@
 'use strict';
+
+const { FOREIGNKEYS } = require("sequelize/types/lib/query-types");
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('freshFoods', {
@@ -6,6 +9,9 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      userId: {
         type: Sequelize.INTEGER
       },
       item: {

@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   freshFood.init({
+    userId: DataTypes.INTEGER,
     item: DataTypes.STRING,
     quantity: DataTypes.INTEGER
   }, {

@@ -9,6 +9,7 @@ const db = require ('./models')
 
 const app = express();
 app.set('view engine', 'ejs');
+//app.use(express.static(__dirname + '/views'));
 
 // Session 
 const SECRET_SESSION = process.env.SECRET_SESSION;
@@ -60,10 +61,33 @@ app.get('/profile', isLoggedIn, (req, res) => {
   res.render('profile');
 });
 
-// app.post('/' (req, res) => {
-//   const { id, name, email } = req.user.get(); 
-//   res.render('profile');
-// });
+app.post('/profile', (req, res) => {
+  let item = req.body.item
+  let quantity = req.body.quantity
+  
+  db.item = item
+  db.quantity = quantity
+  console.log(`I have ${quantity} ${item}`)
+});
+
+app.post('/edit', function(req, res) {
+  console.log(req.body.item, req.body.quantity)
+  // userId = req.params.id
+  console.log(req.params.id)
+  db.freshFood.create({
+    userId: 1,
+    item: req.body.item,
+    quantity: req.body.quantity,
+  })
+  .then(function(profile) {
+    console.log(`${quantity} ${item} saved to database`)
+    res.redirect('/profile')
+  })
+  .catch(function(error) {
+    res.send(error)
+  })
+})
+
 
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
