@@ -43,3 +43,10 @@ ul {
   color: white;
 }
 
+#add {
+  border-radius: 15%;
+}
+
+#delete {
+  border-radius: 15%;
+}
