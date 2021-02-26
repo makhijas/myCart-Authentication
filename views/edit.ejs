@@ -1,9 +1,25 @@
 
 <form action="/profile" method=POST>
-    <p>You currently have the following items in your fridge. You can delete any item(s) or add new items</p>
-    <button id="delete">Delete</button>
+    <!-- <p>You currently have the following items in your fridge. You can delete any item(s) or add new items</p>
+    <button id="delete">Delete</button> -->
   
     <p> To make changes to your fridge, please enter your id below. If you don't know your id, simply go to your profile to find it.</p>
+   
+    <% for( let i=0; i < foods.length; i++ ) { %>
+        <div class="list">
+           <ul>
+              <p class="foodList"> <%= foods[i].dataValues.quantity %> </p> 
+              <p class="foodList"> <%= foods[i].dataValues.item %> </p>
+              <!-- <button id="delete">Delete</button> -->
+              <!-- Delete button -->
+              <p><form method="POST" action="/reviews/{{review._id}}?_method=DELETE">
+                <button type="submit">Delete</button>
+              </form></p>
+           </ul> 
+        </div>
+     <% } %> 
+
+
     <input type="text" name="userId" value="Your ID"></input>
 
     <p> Please enter the item and quantity of the item you want to add to your fridge</p>
@@ -13,3 +29,5 @@
 
     <input id="add" type="submit" value="Add"></input>
 </form>
+
+

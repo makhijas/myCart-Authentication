@@ -46,22 +46,21 @@ app.use((req, res, next) => {
 
 // Controllers
 app.use('/auth', require('./controllers/auth'));
+//app.use('/edit', require('./controllers/edit'));
 
-app.get('/', (req, res) => {
+app.get('/', isLoggedIn, (req, res) => {
+  const { id, name, email } = req.user.get();
   // const {item, quantity} = req.food.get()
-  res.render('index');
+  res.render('index', { name: name, id: id, email: email });
 });
 
-app.get('/edit', isLoggedIn, (req, res) => {
-  res.render('edit');
-});
 
 app.get('/profile', isLoggedIn, (req, res) => {
   const { id, name, email } = req.user.get(); 
   // const { item } = req.food.get()
   db.food.findAll({where: {userId: id}})
   .then(foods => { 
-    console.log(foods)
+    //console.log(foods)
     //res.render('profile')
     if (foods.length === 0) {
       res.send("You have nothing in your fridge")
@@ -72,13 +71,47 @@ app.get('/profile', isLoggedIn, (req, res) => {
 }); 
 
 
+app.get('/edit', isLoggedIn, (req, res) => {
+  const { id, name, email } = req.user.get(); 
+  //console.log("********", req.user)
+  db.food.findAll({where: {userId: id}})
+  .then(foods => { 
+    //console.log(foods)
+    if (foods.length === 0) {
+      res.send("You have nothing in your fridge")
+    } else { 
+      res.render('edit', {name: name, id: id, email: email, foods: foods});
+    }
+  })
+}); 
+
+
+app.post('/edit', function(req, res) {
+  //console.log(req.body.item, req.body.quantity)
+  // userId = req.params.id
+  //console.log(req.params.id)
+  db.food.create({
+    userId: req.params.id,
+    item: req.body.item,
+    quantity: req.body.quantity,
+  })
+  .then(function(post) {
+    //console.log(`${quantity} ${item} saved to database`)
+    res.redirect('/profile')
+  })
+  .catch(function(error) {
+    res.send(error)
+  })
+})
+
+
 app.post('/profile', (req, res) => {
   let item = req.body.item
   let quantity = req.body.quantity
   
   db.item = item
   db.quantity = quantity
-  console.log(`I have ${quantity} ${item}`)
+  //console.log(`I have ${quantity} ${item}`)
   db.food.create({
     //where: {id: req.params.id},
     userId: req.body.userId,
@@ -86,7 +119,7 @@ app.post('/profile', (req, res) => {
     quantity: req.body.quantity,
   })
   .then(function(post) {
-    console.log(`${quantity} ${item} saved to database`)
+    //console.log(`${quantity} ${item} saved to database`)
     res.redirect('/profile')
   })
   .catch(function(error) {
@@ -94,23 +127,23 @@ app.post('/profile', (req, res) => {
   })
 });
 
-app.post('/edit', function(req, res) {
-  console.log(req.body.item, req.body.quantity)
-  // userId = req.params.id
+
+app.delete('/edit', (req, res) =>{
+  console.log("******************************")
   console.log(req.params.id)
-  db.food.create({
-    userId: req.params.id,
-    item: req.body.item,
-    quantity: req.body.quantity,
+  db.food.findOne({
+    where: {
+      id: id
+    }
   })
-  .then(function(post) {
-    console.log(`${quantity} ${item} saved to database`)
-    res.redirect('/profile')
-  })
-  .catch(function(error) {
-    res.send(error)
-  })
-})
+  .then(function(item) {
+    item.destroy()}).then(() => {
+      res.redirect('back')
+    })
+    .catch(function(error) {
+      res.send(error)
+    })
+});
 
 
 const PORT = process.env.PORT || 3000;
