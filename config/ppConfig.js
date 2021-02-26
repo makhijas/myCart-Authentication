@@ -31,6 +31,7 @@ passport.use(new LocalStrategy({
         where: { email }
     })
     .then(user => {
+        console.log(user)
         if (user.password != password) {
         //if (!user || !user.validPassword(password)) {
             cb(null, false);

@@ -6,10 +6,9 @@ const passport = require('./config/ppConfig'); //
 const flash = require('connect-flash');
 const db = require ('./models')
 
-
 const app = express();
 app.set('view engine', 'ejs');
-//app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/views'));
 
 // Session 
 const SECRET_SESSION = process.env.SECRET_SESSION;
@@ -53,38 +52,24 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/edit', (req, res) => {
+app.get('/edit', isLoggedIn, (req, res) => {
   res.render('edit');
 });
 
 app.get('/profile', isLoggedIn, (req, res) => {
-
   const { id, name, email } = req.user.get(); 
-  const { item } = req.food.get()
-  db.food.findByPk(req.user.id, {include: db.user})
-  .then(food => { 
-    console.log(food)
-    res.render('profile', {name: name, id: id, email: email, foodItem:food.dataValues.item, foodQuantity:food.dataValues.quantity, item:item});
+  // const { item } = req.food.get()
+  db.food.findAll({where: {userId: id}})
+  .then(foods => { 
+    console.log(foods)
+    //res.render('profile')
+    if (foods.length === 0) {
+      res.send("You have nothing in your fridge")
+    } else { 
+      res.render('profile', {name: name, id: id, email: email, foods: foods});
+    }
   })
-
-  // res.render('profile', {name: name, id: id, email: email});
 }); 
-
-// app.get('/profile', isLoggedIn, (req, res) => {
-//   db.user.findOne({
-//     include: [db.food],
-//     where: {
-//       id: req.user.id
-//     } 
-//   }).then(function(food){
-//     // users will have a .pets key with an array of pets
-//     // console.log(user[0].pets);
-//     console.log(food)
-//     res.render('profile', { data:food });
-//   })
-//     // const { id, name, email } = req.user.get();
-// }).catch
-
 
 
 app.post('/profile', (req, res) => {
@@ -114,7 +99,7 @@ app.post('/edit', function(req, res) {
   // userId = req.params.id
   console.log(req.params.id)
   db.food.create({
-    //userId: 1,
+    userId: req.params.id,
     item: req.body.item,
     quantity: req.body.quantity,
   })

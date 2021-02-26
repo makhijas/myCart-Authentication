@@ -1,14 +1,16 @@
 
-<h3>Welcome to your FRIDGE! Your USER ID is: <%= id %></h3>
+<h3>Welcome to your FRIDGE <%= name %>! Your USER ID is: <%= id %></h3>
 <p>You currently have the following items in your fridge</p>
 
-<ul>
-    <p class="foodList"> <%= foodItem %> </p>
-    <p class="foodList"> <%= foodQuantity %> </p>
-    <p class="foodList"> <%= item %> </p>
-</ul>
+<% for( let i=0; i < foods.length; i++ ) { %>
+   <div class="list">
+      <ul>
+         <p class="foodList"> <%= foods[i].dataValues.quantity %> </p> 
+         <p class="foodList"> <%= foods[i].dataValues.item %> </p>
+         <button id="delete">Delete</button>
+      </ul> 
+   </div>
+<% } %> 
+<a id="update" href="/edit">Add to myFridge</a>
 
 
-
-
-<a id="update" href="/edit">Update myFridge</a>
