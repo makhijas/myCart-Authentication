@@ -2,7 +2,7 @@ body {
   background-image: url("retro-fridge.jpg");
   background-size: cover;
   width:100%;
-  background-color: mediumaquamarine;
+  background-color: midnightblue;
   background-position: center;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
@@ -112,7 +112,7 @@ a:active {
 }
 
 #title {
-  background-color:midnightblue;
+  background-color:mediumaquamarine;
   /* background-color:rgb(194, 238, 194); */
   margin:auto;
   overflow-x: hidden;
