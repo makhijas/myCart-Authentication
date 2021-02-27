@@ -1,13 +1,16 @@
 
 require('dotenv').config();
 const express = require('express');
+const methodOverride = require('method-override')
 const layouts = require('express-ejs-layouts');
 const session = require('express-session');
 const passport = require('./config/ppConfig'); //
 const flash = require('connect-flash');
 const db = require ('./models')
 
+
 const app = express();
+app.use(methodOverride('_method'))
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/views'));
 
@@ -129,9 +132,10 @@ app.post('/profile', (req, res) => {
 });
 
 
-app.delete('/edit', (req, res) =>{
+app.delete('/edit/:id', (req, res) =>{
   console.log("******************************")
   console.log(req.params.id)
+  let id = req.params.id
   db.food.findOne({
     where: {
       id: id
@@ -139,7 +143,7 @@ app.delete('/edit', (req, res) =>{
   })
   .then(function(item) {
     item.destroy()}).then(() => {
-      res.redirect('back')
+      res.redirect('/profile')
     })
     .catch(function(error) {
       res.send(error)
