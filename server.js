@@ -67,7 +67,9 @@ app.get('/profile', isLoggedIn, (req, res) => {
     //console.log(foods)
     //res.render('profile')
     if (foods.length === 0) {
-      res.send("You have nothing in your fridge")
+      req.flash('error', "It's time for a trip to the grocery store...There's nothing in your fridge right now!");
+      // res.send("You have nothing in your fridge")
+      res.render('profile', {name: name, id: id, email: email, foods: foods});
     } else { 
       res.render('profile', {name: name, id: id, email: email, foods: foods});
     }
@@ -82,7 +84,9 @@ app.get('/edit', isLoggedIn, (req, res) => {
   .then(foods => { 
     //console.log(foods)
     if (foods.length === 0) {
-      res.send("You have nothing in your fridge")
+      req.flash('error', "It's time for a trip to the grocery store...There's nothing in your fridge right now!");
+      // res.send("You have nothing in your fridge")
+      res.render('edit', {name: name, id: id, email: email, foods: foods});
     } else { 
       res.render('edit', {name: name, id: id, email: email, foods: foods});
     }

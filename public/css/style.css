@@ -1,8 +1,12 @@
 body { 
-  color: black;
-  background-color: orange;
+  background-image: url("retro-fridge.jpg");
+  background-size: cover;
+  width:100%;
+  background-color: mediumaquamarine;
   background-position: center;
   text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  color:honeydew
 }
 
 nav ul li {
@@ -18,23 +22,29 @@ nav ul li {
 }
 
 h1 {
-  color: black;
+  color: pink;
   font-size: 90px;
   text-align: center;
   display: inline-block;
+  font-family: 'Montserrat', sans-serif;
 }
 
 h2 {
-  color: black;
+  color: lemonchiffon;
+  font-family: 'Montserrat', sans-serif;
 }
 
 h3 {
-  color: black;
+  color: lemonchiffon;
+  font-family: 'Montserrat', sans-serif;
 }
 
 p {
-  color: black;
+  color: lemonchiffon;
   font-size: medium;
+  font-family: 'Montserrat', sans-serif;
+  align-items: center;
+  text-align: center;
 }
 
 ul {
@@ -45,19 +55,22 @@ ul {
 }
 
 .profileNav{ 
-  color: black;
+  color: white
 }
 
 .list { 
-  margin:1px;
-  border: 2px solid;
+  width: fit-content;
+  align-items: center;
+  margin:auto;
+  padding:10px;
   
+
 }
 
 #update {
   position: justify;
   bottom: 10px;
-  color: black;
+  color: pink;
   padding: 20px 0px 50px 0px;
   text-align: center;
 }
@@ -76,4 +89,33 @@ ul {
   display: inline-block; 
   margin: 0px; 
   padding: 0px;
+}
+
+/* unvisited link */
+a:link {
+  color: blue;
+}
+
+/* visited link */
+a:visited {
+  color: Yellow;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+
+#title {
+  background-color:black;
+  margin:auto;
+  overflow-x: hidden;
+  width: fit-content;
+  height:100% ;
+  margin-bottom: 20px;
 }
