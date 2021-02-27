@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 const express = require('express');
 const layouts = require('express-ejs-layouts');
@@ -97,7 +98,7 @@ app.post('/edit', function(req, res) {
   })
   .then(function(post) {
     //console.log(`${quantity} ${item} saved to database`)
-    res.redirect('/profile')
+    res.redirect('/edit')
   })
   .catch(function(error) {
     res.send(error)
@@ -152,5 +153,4 @@ const server = app.listen(PORT, () => {
 });
 
 module.exports = server;
-
 

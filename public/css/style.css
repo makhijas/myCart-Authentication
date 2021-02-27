@@ -1,6 +1,6 @@
 body { 
   color: black;
-  background-color: white;
+  background-color: orange;
   background-position: center;
   text-align: center;
 }
@@ -44,12 +44,18 @@ ul {
   font-size: larger;
 }
 
+.profileNav{ 
+  color: black;
+}
+
 .list { 
-    border: black;
+  margin:1px;
+  border: 2px solid;
+  
 }
 
 #update {
-  position: center;
+  position: justify;
   bottom: 10px;
   color: black;
   padding: 20px 0px 50px 0px;
@@ -66,7 +72,7 @@ ul {
 
 .foodList { 
   font-size: xx-large;
-  color: black; 
+  color: whitesmoke; 
   display: inline-block; 
   margin: 0px; 
   padding: 0px;

@@ -12,13 +12,12 @@
               <p class="foodList"> <%= foods[i].dataValues.item %> </p>
               <!-- <button id="delete">Delete</button> -->
               <!-- Delete button -->
-              <p><form method="POST" action="/reviews/{{review._id}}?_method=DELETE">
-                <button id="delete" type="submit">Delete</button>
+              <p><form method="POST" action="/edit_method=DELETE">
+                <button type="submit">Delete</button>
               </form></p>
            </ul> 
         </div>
      <% } %> 
-
 
     <input type="text" name="userId" value="Your ID"></input>
 
@@ -28,6 +27,7 @@
     <input type="integer"name="quantity" value="Quantity"></input>
 
     <input id="add" type="submit" value="Add"></input>
+
 </form>
 
 
