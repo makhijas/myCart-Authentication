@@ -4,20 +4,14 @@ body {
   background-position: center;
   text-align: center;
 }
+
 nav ul li {
-  /* text-decoration: none; */
-  /* display: inline-block; */
-  /* margin-right: .3em; */
-  /* position: center; */
-  /* text-align: justify; */
+  display: inline-block;
+  list-style: none;
+  text-align: center;
 }
 
-nav ul {
-  /* list-style: none;
-  text-align: center; */
-}
-
-#profileNav {
+.profileNav {
     display: inline-block;
     position: center;
     text-align: center;
@@ -50,13 +44,8 @@ ul {
   font-size: larger;
 }
 
-#profileNav{ 
-  color: black;
-}
-
-#list { 
-  background-color: black;
-  border: black;
+.list { 
+    border: black;
 }
 
 #update {
