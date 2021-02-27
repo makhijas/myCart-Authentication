@@ -112,10 +112,11 @@ a:active {
 }
 
 #title {
-  background-color:black;
+  background-color:midnightblue;
+  /* background-color:rgb(194, 238, 194); */
   margin:auto;
   overflow-x: hidden;
   width: fit-content;
-  height:100% ;
+  height:100%;
   margin-bottom: 20px;
 }
